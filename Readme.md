@@ -7,12 +7,12 @@
 ## 1. Purpose & Scope
 
 ### 1.1 Purpose
-This framework defines a repeatable, operational lifecycle for proactively hunting adversary activity targeting an organization's AI systems — large language model (LLM) applications and internal copilots, autonomous agents and MCP servers, traditional machine learning models (fraud, risk, recommendation), and third-party AI features embedded within SaaS tools.
+This framework defines a repeatable, operational lifecycle for proactively hunting adversary activity targeting an organization's AI systems large language model (LLM) applications and internal copilots, autonomous agents and MCP servers, traditional machine learning models (fraud, risk, recommendation), and third-party AI features embedded within SaaS tools.
 
 It exists to close a specific, acknowledged gap: MITRE ATLAS gives us a taxonomy of what adversaries do to AI systems, but not a methodology for how a hunter goes from that taxonomy to a validated detection in a real environment. This document is that missing methodology.
 
 ### 1.2 Scope
-This is **Face A** of a two-part program — hunting attacks directed *at* AI systems (data poisoning, prompt injection, model extraction, agent/MCP abuse, etc.). It does not cover **Face B** (AI used *as* a weapon against conventional infrastructure — AI-generated phishing, AI-automated recon, deepfake fraud), which is addressed in a separate companion framework once this one is operational.
+This is **Face A** of a two-part program hunting attacks directed *at* AI systems (data poisoning, prompt injection, model extraction, agent/MCP abuse, etc.). It does not cover **Face B** (AI used *as* a weapon against conventional infrastructure AI-generated phishing, AI-automated recon, deepfake fraud), which is addressed in a separate companion framework once this one is operational.
 
 ### 1.3 In-Scope AI System Categories
 | Category | Examples |
@@ -31,7 +31,7 @@ This framework builds on **MITRE ATLAS** (Adversarial Threat Landscape for Artif
 
 1. **A technique ID is not a detection.** As with ATT&CK, an ATLAS technique may have many procedures; one detection rule rarely covers a technique fully. Coverage claims must specify which procedure(s) are actually covered.
 2. **No hunt without a data-source check.** A hypothesis is not ready for execution until visibility has been confirmed. This is a hard gate, not a suggestion (see Stage 4).
-3. **AI systems are probabilistic — false-positive reasoning must account for model variance.** A hunting hypothesis must explicitly state what distinguishes malicious signal from ordinary model/agent variance, not just what the malicious signal looks like.
+3. **AI systems are probabilistic false-positive reasoning must account for model variance.** A hunting hypothesis must explicitly state what distinguishes malicious signal from ordinary model/agent variance, not just what the malicious signal looks like.
 4. **Validate before you trust a detection.** No detection is considered production-ready until it has been tested against a safe, controlled simulation of the actual technique (Stage 6). Undetected-until-tested rules are treated as unvalidated, not as coverage.
 5. **The taxonomy is a living document.** Given the pace of change in this space, this framework assumes quarterly minimum taxonomy review, not annual.
 
@@ -52,8 +52,8 @@ This framework builds on **MITRE ATLAS** (Adversarial Threat Landscape for Artif
 
 ## 4. The Eight-Stage Lifecycle
 
-### Stage 1 — Scoping & Asset Inventory
-**Objective:** Establish and maintain an accurate, living inventory of every AI system in scope, since AI is the fastest-growing category of shadow IT — it frequently enters an environment embedded inside SaaS products rather than through a formal procurement or engineering process.
+### Stage 1 Scoping & Asset Inventory
+**Objective:** Establish and maintain an accurate, living inventory of every AI system in scope, since AI is the fastest-growing category of shadow IT it frequently enters an environment embedded inside SaaS products rather than through a formal procurement or engineering process.
 
 **Key activities:**
 - Discover AI systems via network/API traffic analysis, SaaS app inventory review, procurement records, and direct engineering team interviews
@@ -66,13 +66,13 @@ This framework builds on **MITRE ATLAS** (Adversarial Threat Landscape for Artif
 
 ---
 
-### Stage 2 — Intelligence Intake & ATLAS Mapping
+### Stage 2 Intelligence Intake & ATLAS Mapping
 **Objective:** Translate external CTI (vendor reports, ATLAS case studies, academic red-team research, incident post-mortems) into ATLAS technique/sub-technique mappings relevant to the org's actual asset inventory.
 
 **Key activities:**
 - Monitor ATLAS changelog and case-study updates (recommend at minimum bi-weekly given release cadence)
 - Map incoming intel to specific ATLAS tactic/technique IDs
-- Cross-reference the technique against Stage 1's asset inventory — is this technique even relevant to something we run?
+- Cross-reference the technique against Stage 1's asset inventory is this technique even relevant to something we run?
 - Flag techniques with no current ATLAS coverage for potential Face-B or internal taxonomy extension
 
 **Output/artifact:** Prioritized technique backlog, each entry tagged with relevant asset category from Stage 1
@@ -81,12 +81,12 @@ This framework builds on **MITRE ATLAS** (Adversarial Threat Landscape for Artif
 
 ---
 
-### Stage 3 — Hypothesis Generation
+### Stage 3 Hypothesis Generation
 **Objective:** Convert a prioritized technique into a specific, testable, falsifiable hunting hypothesis.
 
 **Required hypothesis template** (all four fields mandatory):
 1. **If-then claim:** "If [technique] is occurring against [asset], we would expect to observe [specific signal] in [specific telemetry]."
-2. **Distinguishing condition:** "This differs from normal model/agent variance because [specific reasoning] — e.g., frequency, sequence, or magnitude that ordinary usage does not produce."
+2. **Distinguishing condition:** "This differs from normal model/agent variance because [specific reasoning] e.g., frequency, sequence, or magnitude that ordinary usage does not produce."
 3. **Scope:** Which specific asset(s) from the Stage 1 register this hypothesis applies to.
 4. **ATLAS reference:** Technique/sub-technique ID and, where available, case study reference.
 
@@ -96,8 +96,8 @@ This framework builds on **MITRE ATLAS** (Adversarial Threat Landscape for Artif
 
 ---
 
-### Stage 4 — Data Source & Telemetry Readiness Check
-**Objective:** Confirm the organization actually has the visibility required to test the hypothesis before committing hunt time. This is a hard gate — hypotheses that fail this check are not hunted, they are routed to a telemetry-gap backlog instead.
+### Stage 4 Data Source & Telemetry Readiness Check
+**Objective:** Confirm the organization actually has the visibility required to test the hypothesis before committing hunt time. This is a hard gate hypotheses that fail this check are not hunted, they are routed to a telemetry-gap backlog instead.
 
 **Required telemetry categories to check per hypothesis:**
 - Prompt / query / completion logs
@@ -113,12 +113,12 @@ This framework builds on **MITRE ATLAS** (Adversarial Threat Landscape for Artif
 
 ---
 
-### Stage 5 — Hunt Execution
+### Stage 5 Hunt Execution
 **Objective:** Execute the hunt against confirmed telemetry sources.
 
 **Key activities:**
 - Query relevant logs/telemetry for the hypothesized signal
-- Document all findings, including negative results (a hunt that finds nothing is still a valid, recordable outcome — see Governing Principle in Section 2)
+- Document all findings, including negative results (a hunt that finds nothing is still a valid, recordable outcome see Governing Principle in Section 2)
 - Escalate any confirmed malicious activity to IR immediately, independent of the rest of this lifecycle
 
 **Output/artifact:** Hunt findings record (positive, negative, or inconclusive)
@@ -127,28 +127,28 @@ This framework builds on **MITRE ATLAS** (Adversarial Threat Landscape for Artif
 
 ---
 
-### Stage 6 — Validation via Controlled Simulation
+### Stage 6 Validation via Controlled Simulation
 **Objective:** Confirm that a candidate detection would actually fire against the real technique, not just against the hunter's mental model of it.
 
 **Key activities:**
 - Where available, use existing adversarial ML testing tools to safely simulate the technique in a controlled, non-production environment
-- Where no mature tooling exists for a given technique — currently the case for much of the agentic AI attack surface — document a manual, reviewed simulation procedure instead, and flag it explicitly as manually validated rather than tool-validated
+- Where no mature tooling exists for a given technique currently the case for much of the agentic AI attack surface document a manual, reviewed simulation procedure instead, and flag it explicitly as manually validated rather than tool-validated
 - Confirm the candidate detection fires on the simulated technique and does not fire on a documented set of benign/normal-variance scenarios
 
 **Output/artifact:** Validation record (tool-validated or manually-validated), attached to the candidate detection
 **Cadence:** Before any detection moves to Stage 7 production status
 **Owner:** Threat Hunter, with Detection Engineer support
 
-**Honest note for this framework version:** a mature, technique-by-technique adversarial simulation library (an "Atomic Red Team for AI") does not yet broadly exist. Until it does, this stage will lean heavily on manual, carefully reviewed simulation — track this as a known maturity gap, not a process failure.
+**Honest note for this framework version:** a mature, technique-by-technique adversarial simulation library (an "Atomic Red Team for AI") does not yet broadly exist. Until it does, this stage will lean heavily on manual, carefully reviewed simulation track this as a known maturity gap, not a process failure.
 
 ---
 
-### Stage 7 — Detection Codification
+### Stage 7 Detection Codification
 **Objective:** Turn a validated hunt into a standing, production detection.
 
 **Key activities:**
 - Write the detection logic in the org's standard detection-as-code format
-- Explicitly document which procedure(s) of the ATLAS technique this detection covers — and which it does not
+- Explicitly document which procedure(s) of the ATLAS technique this detection covers and which it does not
 - Tag the detection with its ATLAS technique/sub-technique ID and Stage 1 asset scope for future coverage-mapping
 - Hand off to SOC with a triage playbook (what the alert means, what to check, escalation path)
 
@@ -158,8 +158,8 @@ This framework builds on **MITRE ATLAS** (Adversarial Threat Landscape for Artif
 
 ---
 
-### Stage 8 — Reporting & Lessons Learned
-**Objective:** Close the loop — feed findings back into taxonomy refinement, coverage tracking, and program prioritization.
+### Stage 8 Reporting & Lessons Learned
+**Objective:** Close the loop feed findings back into taxonomy refinement, coverage tracking, and program prioritization.
 
 **Key activities:**
 - Update the technique coverage map (which ATLAS techniques/procedures are covered, partially covered, or not coverable given current visibility)
@@ -181,11 +181,11 @@ Use this to self-assess program maturity and set realistic near-term goals.
 
 | Level | Description |
 |---|---|
-| **Level 0 — Unaware** | No formal AI asset inventory; AI risk not distinguished from general IT risk |
-| **Level 1 — Aware** | Asset inventory exists but is manually maintained and incomplete; ATLAS mapping is ad hoc |
-| **Level 2 — Operational** | Full 8-stage lifecycle in use; hypotheses documented; Stage 4 gate enforced |
-| **Level 3 — Validated** | Stage 6 validation consistently performed (tool- or manually-validated) before any detection reaches production |
-| **Level 4 — Adaptive** | Quarterly taxonomy review formalized; internal extensions to ATLAS tracked and contributed back to the community where appropriate; Face B program integrated |
+| **Level 0 Unaware** | No formal AI asset inventory; AI risk not distinguished from general IT risk |
+| **Level 1 Aware** | Asset inventory exists but is manually maintained and incomplete; ATLAS mapping is ad hoc |
+| **Level 2 Operational** | Full 8-stage lifecycle in use; hypotheses documented; Stage 4 gate enforced |
+| **Level 3 Validated** | Stage 6 validation consistently performed (tool- or manually-validated) before any detection reaches production |
+| **Level 4 Adaptive** | Quarterly taxonomy review formalized; internal extensions to ATLAS tracked and contributed back to the community where appropriate; Face B program integrated |
 
 Most organizations starting this framework should target **Level 2 within the first quarter**, and treat Level 3 as the honest, achievable ceiling until adversarial-simulation tooling for AI matures further industry-wide.
 
@@ -195,7 +195,7 @@ Most organizations starting this framework should target **Level 2 within the fi
 
 - This document is versioned (currently v1.0). Material changes to the lifecycle stages require AI Threat Hunting Lead sign-off.
 - The technique/hypothesis workbook (companion artifact) is reviewed and updated on the same quarterly cadence as Stage 8's formal rollup.
-- Any internal taxonomy extensions (techniques observed but not yet in ATLAS) should be tracked separately and, where appropriate, submitted back to the ATLAS project — consistent with its open, community-contribution model.
+- Any internal taxonomy extensions (techniques observed but not yet in ATLAS) should be tracked separately and, where appropriate, submitted back to the ATLAS project consistent with its open, community-contribution model.
 
 ---
 
@@ -205,4 +205,3 @@ This document is designed to be used alongside two companion artifacts:
 1. **AI Asset Inventory Register** (Stage 1 template)
 2. **ATLAS-Scoped Hunting Hypothesis Workbook** (Stages 2–4 working document, pre-populated with priority techniques across all four in-scope asset categories)
 
-Both are provided separately.
