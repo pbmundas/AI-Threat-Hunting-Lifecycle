@@ -1,7 +1,4 @@
 # AI Threat Hunting Lifecycle & Methodology
-### Face A: Hunting Attacks *On* AI Systems
-**Framework Version 1.0**
-
 ---
 
 ## 1. Purpose & Scope
